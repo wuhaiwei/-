@@ -39,12 +39,17 @@
 - (void)addAnimation
 {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
-    animation.beginTime = 3 + CACurrentMediaTime();
+    animation.beginTime = 1;
     animation.duration = 4;
     animation.repeatCount = MAXFLOAT;
     animation.fromValue = @(0);
-    animation.toValue = @(self.bgView.frame.size.width);
-    [self.bgView.layer addAnimation:animation forKey:nil];
+    animation.toValue = @(self.bgView.frame.size.width + 90);
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.animations = @[animation];
+    group.repeatCount = MAXFLOAT;
+    group.duration = 4;
+    [self.bgView.layer addAnimation:group forKey:nil];
 }
 
 #pragma mark - getter
@@ -64,7 +69,7 @@
         _leftGradientLayer = [CAGradientLayer layer];
         _leftGradientLayer.startPoint = CGPointMake(0, 0.5);
         _leftGradientLayer.endPoint = CGPointMake(1, 0.5);
-        _leftGradientLayer.bounds = self.bounds;
+        _leftGradientLayer.bounds = self.bgView.bounds;
         _leftGradientLayer.anchorPoint = CGPointMake(0, 0);
         _leftGradientLayer.position = CGPointMake(-self.bgView.bounds.size.width, 0);
         
