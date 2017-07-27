@@ -39,6 +39,7 @@
 - (void)addAnimation
 {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
+    animation.beginTime = 3 + CACurrentMediaTime();
     animation.duration = 4;
     animation.repeatCount = MAXFLOAT;
     animation.fromValue = @(0);
